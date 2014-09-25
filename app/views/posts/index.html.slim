@@ -1,2 +1,7 @@
-h1 Posts#index
-p Find me in app/views/posts/index.html.slim
+h1 Lets have a posts party!
+
+- @posts.each do |post|
+  article
+    header
+      h1 = @post.title
+    = raw(@post.content)
