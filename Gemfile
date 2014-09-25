@@ -10,6 +10,7 @@ gem 'slim'
 gem 'sorcery'
 gem 'pundit'
 
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
@@ -20,6 +21,11 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :development do
   gem 'spring'
+  gem "spring-commands-rspec"
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.1.0'
 end
 
 gem 'unicorn'
