@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :posts
 
   get 'signup', to: 'users#new', as: 'signup'
+  get 'me', to: 'users#show', as: 'me'
 
   # Routing /dashboard to the users#dashboard method
   get 'dashboard', to: 'users#dashboard', as: 'dashboard'
@@ -64,10 +65,4 @@ Rails.application.routes.draw do
   #   resources :posts, concerns: :toggleable
   #   resources :photos, concerns: :toggleable
 
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end
