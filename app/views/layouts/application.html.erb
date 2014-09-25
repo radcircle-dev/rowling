@@ -11,7 +11,7 @@
 	<%= link_to 'Home', root_path %> 
 	<% if current_user %>
 		<%= link_to current_user.name, me_path %>
-		<% if current_user.role %>
+		<% if radcircle_member %>
 			<%= link_to 'Dashboard', dashboard_path %>
 		<% end -%>
 		<%= link_to 'sign out', logout_path %>
@@ -19,6 +19,7 @@
 
 	<% else %>
 		<%= link_to 'sign in', login_path %>
+		<%= link_to 'sign up', new_user_path %>
 
 	<% end -%>
 
