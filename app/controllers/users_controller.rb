@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
-    #@user = User.find(params[:id])
+    @title = @user.name
   end
 
   def new
@@ -20,8 +20,14 @@ class UsersController < ApplicationController
     end
   end
   def dashboard 
-    @user = current_user
-    @fb_likes = facebook_likes
+    if !current_user || !current_user.role
+      flash[:notice] = "You do not have access to that page!"
+      redirect_to root_path
+    else  
+      @user = current_user
+      @fb_likes = facebook_likes
+      @title = "Dashboard"
+    end
   end
 
 private
