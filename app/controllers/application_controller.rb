@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
 
   	require 'net/http'
 	def facebook_likes
-  		# uri = URI("http://graph.facebook.com/Radcircle?fields=likes")
-  		# data = Net::HTTP.get(uri)
-  		# JSON.parse(data)['likes']
+  		uri = URI("http://graph.facebook.com/Radcircle?fields=likes")
+  		data = Net::HTTP.get(uri)
+  		JSON.parse(data)['likes']
 	end
 end
