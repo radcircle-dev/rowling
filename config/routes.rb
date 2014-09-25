@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   get 'signup', to: 'users#new', as: 'signup'
 
+  # Routing /dashboard to the users#dashboard method
+  get 'dashboard', to: 'users#dashboard', as: 'dashboard'
+
   controller :sessions do
     get 'login' => :new
     post 'login' => :create

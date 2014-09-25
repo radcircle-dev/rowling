@@ -1,0 +1,15 @@
+div.dashboard 
+	p.name 
+		| Hello 
+		b = @user.name
+		| , it's great to see you today!
+
+	p.role 
+		| Your current role:  
+		= @user.role
+
+	p.fb_likes
+		| Radcircle's Facebook page is up to 
+		b = @fb_likes 
+		|  total likes now!!
+

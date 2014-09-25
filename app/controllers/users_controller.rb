@@ -19,6 +19,10 @@ class UsersController < ApplicationController
       render :new
     end
   end
+  def dashboard 
+    @user = current_user
+    @fb_likes = facebook_likes
+  end
 
 private
   def permitted_params
