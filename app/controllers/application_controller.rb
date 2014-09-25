@@ -10,12 +10,21 @@ class ApplicationController < ActionController::Base
   		end
   	end
 
+  	def radcircle_member
+  		if current_user.role == "standard" || !current_user.role
+  			false
+  		else 
+  			true
+  		end
+  	end
+
+  	helper_method :radcircle_member
   	helper_method :page_title 
 
   	require 'net/http'
 	def facebook_likes
-  		uri = URI("http://graph.facebook.com/Radcircle?fields=likes")
-  		data = Net::HTTP.get(uri)
-  		JSON.parse(data)['likes']
+  		# uri = URI("http://graph.facebook.com/Radcircle?fields=likes")
+  		# data = Net::HTTP.get(uri)
+  		# JSON.parse(data)['likes']
 	end
 end
