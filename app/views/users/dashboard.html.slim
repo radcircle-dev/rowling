@@ -12,3 +12,17 @@ div.dashboard
 		| Radcircle's Facebook page is up to 
 		b = @fb_likes 
 		|  total likes now!!
+	ul.navigation
+		li 
+			= link_to "New Post", new_post_path
+		- if current_user.role == "admin"
+			li 
+				| users
+				ul
+					- @users.each do |f|
+						li 
+							= link_to f.name , edit_user_path(f.id)
+							|  -- 
+							= f.role || "standard user"
+
+

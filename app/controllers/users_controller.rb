@@ -9,8 +9,24 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(permitted_params)
+      redirect_to dashboard_path
+    else
+      render :edit
+    end
+  end
+
   def create
     @user = User.new(permitted_params)
+    if User.count == 0
+      @user.role = "admin"
+    end
     if @user.save
       auto_login(@user)
       flash[:notice] = "Thanks for signing up!"
@@ -20,11 +36,12 @@ class UsersController < ApplicationController
     end
   end
   def dashboard 
-    if !current_user || !current_user.role
+    if !current_user || !current_user.role || current_user.role == "standard"
       flash[:notice] = "You do not have access to that page!"
       redirect_to root_path
     else  
       @user = current_user
+      @users = User.all.sort_by &:created_at
       @fb_likes = facebook_likes
       @title = "Dashboard"
     end
@@ -34,7 +51,8 @@ private
   def permitted_params
     params.require(:user).permit(:name,
                                  :email,
-                                 :password)
+                                 :password,
+                                 :role)
   end
 
 end

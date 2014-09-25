@@ -1,0 +1,17 @@
+p 
+	| editing user 
+	= @user.name
+= simple_form_for @user do |f|
+	
+	= f.input :name
+
+	= f.select :role
+		option 
+			| admin
+		option
+			| editor
+		option
+			| intern
+		option
+			| standard
+	= f.submit
