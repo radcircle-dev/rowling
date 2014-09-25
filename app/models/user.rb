@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
-
   ROLES = %w(admin editor author intern)
+
+  validates :name, :email, presence: true
+  validates :role, inclusion: { in: ROLES }, allow_blank: true
 
   def admin?
     role == 'admin'
