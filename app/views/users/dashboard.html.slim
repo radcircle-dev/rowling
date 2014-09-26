@@ -6,7 +6,7 @@ div.dashboard
 
 	p.role 
 		| Your current role:  
-		= @user.role
+		= @user.role.humanize
 
 	p.fb_likes
 		| Radcircle's Facebook page is up to 

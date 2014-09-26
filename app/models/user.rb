@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
     role == 'standard'
   end
 
+  def the_only_admin?
+    admin? && (User.where(role: 'admin').count == 1)
+  end
+
 end

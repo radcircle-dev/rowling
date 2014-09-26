@@ -10,7 +10,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @roles = ["admin", "editor", "author", "intern", "standard"]
     @admins = User.where(role: "admin")
     @user = User.find(params[:id])
   end
@@ -26,11 +25,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(permitted_params)
-    if User.count == 0
-      @user.role = "admin"
-    elsif User.count > 0
-      @user.role = "standard"
-    end
+    @user.role = User.count.zero? ? "admin" : "standard"
     if @user.save
       auto_login(@user)
       flash[:notice] = "Thanks for signing up!"
@@ -39,6 +34,8 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
+  ## This needs to be extracted out at some point, but for now good work!
   def dashboard 
     if !current_user || !current_user.role || current_user.role.downcase == "standard"
       flash[:notice] = "You do not have access to that page!"
