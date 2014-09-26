@@ -11,9 +11,9 @@ class ApplicationController < ActionController::Base
   	end
 
   	def radcircle_member
-  		if current_user.role == "standard" || !current_user.role
+  		if !current_user.role || current_user.role.downcase == "standard" 
   			false
-  		else 
+  		elsif current_user  			
   			true
   		end
   	end
