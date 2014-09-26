@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @roles = ["admin", "editor", "author", "intern", "standard"]
+    @admins = User.where(role: "admin")
     @user = User.find(params[:id])
   end
 
@@ -26,6 +28,8 @@ class UsersController < ApplicationController
     @user = User.new(permitted_params)
     if User.count == 0
       @user.role = "admin"
+    elsif User.count > 0
+      @user.role = "standard"
     end
     if @user.save
       auto_login(@user)
@@ -36,12 +40,12 @@ class UsersController < ApplicationController
     end
   end
   def dashboard 
-    if !current_user || !current_user.role || current_user.role == "standard"
+    if !current_user || !current_user.role || current_user.role.downcase == "standard"
       flash[:notice] = "You do not have access to that page!"
       redirect_to root_path
     else  
       @user = current_user
-      @users = User.all.sort_by &:created_at
+      @users = User.all.sort_by &:role
       @fb_likes = facebook_likes
       @title = "Dashboard"
     end
