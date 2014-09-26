@@ -15,7 +15,7 @@ div.dashboard
 	ul.navigation
 		li 
 			= link_to "New Post", new_post_path
-		- if current_user.role == "admin"
+		- if current_user.role.downcase == "admin"
 			li 
 				| users
 				ul

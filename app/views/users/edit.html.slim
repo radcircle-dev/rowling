@@ -1,17 +1,25 @@
 p 
 	| editing user 
 	= @user.name
+
 = simple_form_for @user do |f|
 	
 	= f.input :name
+	= f.input :email
+	- if @admins.count != 1 ||  @user.name != current_user.name
+		| Role: 
+		= f.select :role
+			= @roles.each do |role|
+				- if @user.role == role
+					option selected="selected"
+						= role
+				- else 
+					option
+						= role
+	- else
+		| You are the only admin, you cannot edit your role
+	br
 
-	= f.select :role
-		option 
-			| admin
-		option
-			| editor
-		option
-			| intern
-		option
-			| standard
 	= f.submit
+
+= link_to "Back", dashboard_path
